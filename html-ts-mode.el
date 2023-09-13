@@ -60,11 +60,13 @@
     ((doctype) @font-lock-keyword-face)))
 
 (defun html-ts-imenu-node-p (node)
+  "Return t if NODE is a valid imenu node."
   (and (string-match-p "^h[0-6]$" (treesit-node-text node))
        (equal (treesit-node-type (treesit-node-parent node))
               "start_tag")))
 
 (defun html-ts-imenu-name-function (node)
+  "Return the name of the imenu entry for NODE."
   (let ((name (treesit-node-text node)))
     (if (html-ts-imenu-node-p node)
         (concat name " / "
@@ -74,7 +76,7 @@
       name)))
 
 (defun html-ts-setup ()
-  "Setup for html-ts-mode."
+  "Setup for `html-ts-mode'."
   (interactive)
   (setq-local treesit-font-lock-settings
               (apply #'treesit-font-lock-rules
