@@ -93,7 +93,9 @@
   (setq-local treesit-font-lock-level 5)
   (setq-local treesit-simple-indent-rules
               `((html
-                 ((parent-is "fragment") parent-bol 0)
+                 ;; Note: in older grammars, `document' was known as
+                 ;; `fragment'.
+                 ((parent-is "document") parent-bol 0)
                  ((node-is ,(regexp-opt '("element" "self_closing_tag"))) parent 2)
                  ((node-is "end_tag") parent 0)
                  ((node-is "/") parent 0)
